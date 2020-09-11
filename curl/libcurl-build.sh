@@ -35,7 +35,7 @@ trap 'echo -e "${alert}** ERROR with Build - Check /tmp/curl*.log${alertdim}"; t
 
 CURL_VERSION="curl-7.50.1"
 IOS_SDK_VERSION=""
-IOS_MIN_SDK_VERSION="7.1"
+IOS_MIN_SDK_VERSION="9.0"
 TVOS_SDK_VERSION=""
 TVOS_MIN_SDK_VERSION="9.0"
 IPHONEOS_DEPLOYMENT_TARGET="6.0"
