@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# This script builds openssl+libcurl libraries for MacOS, iOS and tvOS 
+# This script builds openssl+libcurl libraries for MacOS, iOS and tvOS
 #
 # Jason Cox, @jasonacox
 #   https://github.com/jasonacox/Build-OpenSSL-cURL
@@ -42,7 +42,7 @@ usage ()
 	echo -e "${bold}Usage:${normal}"
 	echo
 	echo -e "  ${subbold}$0${normal} [-o ${dim}<OpenSSL version>${normal}] [-c ${dim}<curl version>${normal}] [-n ${dim}<nghttp2 version>${normal}] [-d] [-e] [-x] [-h]"
-	echo 
+	echo
 	echo "         -o <version>   Build OpenSSL version (default $OPENSSL)"
 	echo "         -c <version>   Build curl version (default $LIBCURL)"
 	echo "         -n <version>   Build nghttp2 version (default $NGHTTP2)"
@@ -51,7 +51,7 @@ usage ()
 	echo "         -b             Compile without bitcode"
 	echo "         -x             No color output"
 	echo "         -h             Show usage"
-	echo 
+	echo
     exit 127
 }
 
@@ -99,15 +99,15 @@ echo
 
 ## OpenSSL Build
 echo
-cd openssl 
+cd openssl
 echo -e "${bold}Building OpenSSL${normal}"
 ./openssl-build.sh -v "$OPENSSL" $engine $colorflag
 cd ..
 
 ## Nghttp2 Build
 if [ "$buildnghttp2" == "" ]; then
-	NGHTTP2="NONE"	
-else 
+	NGHTTP2="NONE"
+else
 	echo
 	echo -e "${bold}Building nghttp2 for HTTP2 support${normal}"
 	cd nghttp2
@@ -122,7 +122,7 @@ cd curl
 ./libcurl-build.sh -v "$LIBCURL" $disablebitcode $colorflag $buildnghttp2
 cd ..
 
-echo 
+echo
 echo -e "${bold}Libraries...${normal}"
 echo
 echo -e "${subbold}openssl${normal} [${dim}$OPENSSL${normal}]${dim}"

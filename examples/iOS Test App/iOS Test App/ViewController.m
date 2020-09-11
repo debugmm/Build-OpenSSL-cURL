@@ -169,7 +169,9 @@ int iOSCurlProgressCallback(void *clientp, double dltotal, double dlnow, double 
     _resultText.text = [@"" stringByAppendingFormat:@"iOS cURL Test App v%@\n@jasonacox/Build-OpenSSL-cURL\n\nUsing: %s\n\n\n\n",[[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"], curl_version()];
     
     _resultText.scrollEnabled = true;
-    
+
+    curl_version_info_data *d = curl_version_info(CURLVERSION_NOW);
+    NSLog(@"");
 }
 
 // GET URL - display results interactively via textview

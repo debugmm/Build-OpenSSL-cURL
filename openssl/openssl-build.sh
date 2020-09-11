@@ -39,7 +39,7 @@ alertdim="\033[0m${red}\033[2m"
 trap 'echo -e "${alert}** ERROR with Build - Check /tmp/openssl*.log${alertdim}"; tail -3 /tmp/openssl*.log' INT TERM EXIT
 
 OPENSSL_VERSION="openssl-1.1.1d"
-IOS_MIN_SDK_VERSION="7.1"
+IOS_MIN_SDK_VERSION="9.0"
 IOS_SDK_VERSION=""
 TVOS_MIN_SDK_VERSION="9.0"
 TVOS_SDK_VERSION=""
@@ -54,9 +54,9 @@ usage ()
 	echo "         -v   version of OpenSSL (default $OPENSSL_VERSION)"
 	echo "         -s   iOS SDK version (default $IOS_MIN_SDK_VERSION)"
 	echo "         -t   tvOS SDK version (default $TVOS_MIN_SDK_VERSION)"
-	echo "         -e   compile with engine support"	
+	echo "         -e   compile with engine support"
 	echo "         -x   disable color output"
-	echo "         -h   show usage"	
+	echo "         -h   show usage"
 	echo
 	trap - INT TERM EXIT
 	exit 127
@@ -209,7 +209,7 @@ buildTVOS()
                 LANG=C sed -i -- 's/fork()/-1/' "./test/drbgtest.c"
 		LANG=C sed -i -- 's/!defined(OPENSSL_NO_ASYNC)/defined(HAVE_FORK)/' "./crypto/async/arch/async_posix.h"
 	fi
-	
+
 	# Patch Configure to build for tvOS, not iOS
 	LANG=C sed -i -- 's/D\_REENTRANT\:iOS/D\_REENTRANT\:tvOS/' "./Configure"
 	chmod u+x ./Configure
@@ -298,29 +298,41 @@ lipo \
 	-create -output Mac/lib/libssl.a
 
 echo -e "${bold}Building iOS libraries${dim}"
-buildIOS "armv7"
+# buildIOS "armv7"
 buildIOS "armv7s"
 buildIOS "arm64"
 buildIOS "arm64e"
-buildIOS "i386"
+# buildIOS "i386"
 buildIOS "x86_64"
 
 echo "  Copying headers and libraries"
 cp /tmp/${OPENSSL_VERSION}-iOS-arm64/include/openssl/* iOS/include/openssl/
 
+# lipo \
+# 	"/tmp/${OPENSSL_VERSION}-iOS-armv7/lib/libcrypto.a" \
+# 	"/tmp/${OPENSSL_VERSION}-iOS-armv7s/lib/libcrypto.a" \
+# 	"/tmp/${OPENSSL_VERSION}-iOS-i386/lib/libcrypto.a" \
+# 	"/tmp/${OPENSSL_VERSION}-iOS-arm64/lib/libcrypto.a" \
+# 	"/tmp/${OPENSSL_VERSION}-iOS-arm64e/lib/libcrypto.a" \
+# 	"/tmp/${OPENSSL_VERSION}-iOS-x86_64/lib/libcrypto.a" \
+# 	-create -output iOS/lib/libcrypto.a
 lipo \
-	"/tmp/${OPENSSL_VERSION}-iOS-armv7/lib/libcrypto.a" \
 	"/tmp/${OPENSSL_VERSION}-iOS-armv7s/lib/libcrypto.a" \
-	"/tmp/${OPENSSL_VERSION}-iOS-i386/lib/libcrypto.a" \
 	"/tmp/${OPENSSL_VERSION}-iOS-arm64/lib/libcrypto.a" \
 	"/tmp/${OPENSSL_VERSION}-iOS-arm64e/lib/libcrypto.a" \
 	"/tmp/${OPENSSL_VERSION}-iOS-x86_64/lib/libcrypto.a" \
 	-create -output iOS/lib/libcrypto.a
 
+# lipo \
+# 	"/tmp/${OPENSSL_VERSION}-iOS-armv7/lib/libssl.a" \
+# 	"/tmp/${OPENSSL_VERSION}-iOS-armv7s/lib/libssl.a" \
+# 	"/tmp/${OPENSSL_VERSION}-iOS-i386/lib/libssl.a" \
+# 	"/tmp/${OPENSSL_VERSION}-iOS-arm64/lib/libssl.a" \
+# 	"/tmp/${OPENSSL_VERSION}-iOS-arm64e/lib/libssl.a" \
+# 	"/tmp/${OPENSSL_VERSION}-iOS-x86_64/lib/libssl.a" \
+# 	-create -output iOS/lib/libssl.a
 lipo \
-	"/tmp/${OPENSSL_VERSION}-iOS-armv7/lib/libssl.a" \
 	"/tmp/${OPENSSL_VERSION}-iOS-armv7s/lib/libssl.a" \
-	"/tmp/${OPENSSL_VERSION}-iOS-i386/lib/libssl.a" \
 	"/tmp/${OPENSSL_VERSION}-iOS-arm64/lib/libssl.a" \
 	"/tmp/${OPENSSL_VERSION}-iOS-arm64e/lib/libssl.a" \
 	"/tmp/${OPENSSL_VERSION}-iOS-x86_64/lib/libssl.a" \
