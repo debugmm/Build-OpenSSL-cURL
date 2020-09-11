@@ -38,7 +38,7 @@ alertdim="\033[0m${red}\033[2m"
 # set trap to help debug build errors
 trap 'echo -e "${alert}** ERROR with Build - Check /tmp/openssl*.log${alertdim}"; tail -3 /tmp/openssl*.log' INT TERM EXIT
 
-OPENSSL_VERSION="openssl-1.1.1d"
+OPENSSL_VERSION="openssl-1.1.1g"
 IOS_MIN_SDK_VERSION="9.0"
 IOS_SDK_VERSION=""
 TVOS_MIN_SDK_VERSION="9.0"
