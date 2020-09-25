@@ -186,7 +186,11 @@ int iOSCurlProgressCallback(void *clientp, double dltotal, double dlnow, double 
     if (!_urlText.text || [_urlText.text isEqualToString:@""]) {
         _urlText.text = @"http://www.apple.com";  // no address provided, fill in default
     }
-    
+    // wx1.sinaimg.cn
+    _urlText.text = @"https://42.81.209.39/orj960/006qnE67gy1ggria4zxmjj30u0140npd.jpg";
+    struct curl_slist *host = NULL;
+    host = curl_slist_append(NULL, "wx1.sinaimg.cn:443:42.81.209.39");
+
     if (_urlText.text && ![_urlText.text isEqualToString:@""]) {
         CURLcode theResult;
         NSURL *url = [NSURL URLWithString:_urlText.text];
@@ -194,6 +198,7 @@ int iOSCurlProgressCallback(void *clientp, double dltotal, double dlnow, double 
         _dataToSendBookmark = 0U;
         
         // Set CURL callback functions
+        curl_easy_setopt(_curl, CURLOPT_RESOLVE, host);
         curl_easy_setopt(_curl, CURLOPT_DEBUGFUNCTION, iOSCurlDebugCallback);  // function to get debug data to view
         curl_easy_setopt(_curl, CURLOPT_DEBUGDATA, self);
         curl_easy_setopt(_curl, CURLOPT_WRITEFUNCTION, iOSCurlWriteCallback);  // function to get write data to view

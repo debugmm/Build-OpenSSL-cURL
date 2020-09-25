@@ -303,7 +303,7 @@ buildIOS "armv7s"
 buildIOS "arm64"
 buildIOS "arm64e"
 # buildIOS "i386"
-buildIOS "x86_64"
+# buildIOS "x86_64"
 
 echo "  Copying headers and libraries"
 cp /tmp/${OPENSSL_VERSION}-iOS-arm64/include/openssl/* iOS/include/openssl/
@@ -320,7 +320,7 @@ lipo \
 	"/tmp/${OPENSSL_VERSION}-iOS-armv7s/lib/libcrypto.a" \
 	"/tmp/${OPENSSL_VERSION}-iOS-arm64/lib/libcrypto.a" \
 	"/tmp/${OPENSSL_VERSION}-iOS-arm64e/lib/libcrypto.a" \
-	"/tmp/${OPENSSL_VERSION}-iOS-x86_64/lib/libcrypto.a" \
+	# "/tmp/${OPENSSL_VERSION}-iOS-x86_64/lib/libcrypto.a" \
 	-create -output iOS/lib/libcrypto.a
 
 # lipo \
@@ -335,7 +335,7 @@ lipo \
 	"/tmp/${OPENSSL_VERSION}-iOS-armv7s/lib/libssl.a" \
 	"/tmp/${OPENSSL_VERSION}-iOS-arm64/lib/libssl.a" \
 	"/tmp/${OPENSSL_VERSION}-iOS-arm64e/lib/libssl.a" \
-	"/tmp/${OPENSSL_VERSION}-iOS-x86_64/lib/libssl.a" \
+	# "/tmp/${OPENSSL_VERSION}-iOS-x86_64/lib/libssl.a" \
 	-create -output iOS/lib/libssl.a
 
 

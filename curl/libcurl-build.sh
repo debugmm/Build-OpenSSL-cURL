@@ -282,7 +282,7 @@ echo -e "${bold}Building iOS libraries (bitcode)${dim}"
 buildIOS "armv7s" "bitcode"
 buildIOS "arm64" "bitcode"
 buildIOS "arm64e" "bitcode"
-buildIOS "x86_64" "bitcode"
+# buildIOS "x86_64" "bitcode"
 # buildIOS "i386" "bitcode"
 
 # lipo \
@@ -297,7 +297,7 @@ lipo \
 	"/tmp/${CURL_VERSION}-iOS-armv7s-bitcode/lib/libcurl.a" \
 	"/tmp/${CURL_VERSION}-iOS-arm64-bitcode/lib/libcurl.a" \
 	"/tmp/${CURL_VERSION}-iOS-arm64e-bitcode/lib/libcurl.a" \
-	"/tmp/${CURL_VERSION}-iOS-x86_64-bitcode/lib/libcurl.a" \
+	# "/tmp/${CURL_VERSION}-iOS-x86_64-bitcode/lib/libcurl.a" \
 	-create -output lib/libcurl_iOS.a
 
 
@@ -307,7 +307,7 @@ if [[ "${NOBITCODE}" == "yes" ]]; then
 	buildIOS "armv7s" "nobitcode"
 	buildIOS "arm64" "nobitcode"
 	buildIOS "arm64e" "nobitcode"
-	buildIOS "x86_64" "nobitcode"
+	# buildIOS "x86_64" "nobitcode"
 	# buildIOS "i386" "nobitcode"
 
 	# lipo \
@@ -322,7 +322,7 @@ if [[ "${NOBITCODE}" == "yes" ]]; then
 		"/tmp/${CURL_VERSION}-iOS-armv7s-nobitcode/lib/libcurl.a" \
 		"/tmp/${CURL_VERSION}-iOS-arm64-nobitcode/lib/libcurl.a" \
 		"/tmp/${CURL_VERSION}-iOS-arm64e-nobitcode/lib/libcurl.a" \
-		"/tmp/${CURL_VERSION}-iOS-x86_64-nobitcode/lib/libcurl.a" \
+		# "/tmp/${CURL_VERSION}-iOS-x86_64-nobitcode/lib/libcurl.a" \
 		-create -output lib/libcurl_iOS_nobitcode.a
 
 fi
