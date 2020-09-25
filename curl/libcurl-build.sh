@@ -187,6 +187,7 @@ buildIOS()
 						    --disable-shared --enable-static \
 								--enable-http --enable-ipv6 --enable-doh \
 								--enable-ftp --enable-file \
+								--enable-http-auth --enable-cookies \
 								-with-random=/dev/urandom \
 								--with-ssl=${OPENSSL}/iOS \
 								${NGHTTP2CFG} --host="arm-apple-darwin" &> "/tmp/${CURL_VERSION}-iOS-${ARCH}-${BITCODE}.log"
@@ -196,6 +197,7 @@ buildIOS()
 							  --disable-shared --enable-static \
 								--enable-http --enable-ipv6 --enable-doh \
 								--enable-ftp --enable-file \
+								--enable-http-auth --enable-cookies \
 								-with-random=/dev/urandom \
 								--with-ssl=${OPENSSL}/iOS \
 								${NGHTTP2CFG} --host="${ARCH}-apple-darwin" &> "/tmp/${CURL_VERSION}-iOS-${ARCH}-${BITCODE}.log"
